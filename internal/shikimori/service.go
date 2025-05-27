@@ -3,6 +3,7 @@ package shikimori
 import (
 	"context"
 	"log"
+	"os"
 
 	"github.com/machinebox/graphql"
 )
@@ -45,7 +46,7 @@ func (s *Service) SearchAnime(ctx context.Context, search string, limit int) ([]
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Origin", "https://shikimori.one")
 	req.Header.Set("User-Agent", "shiki_api_test")
-	req.Header.Set("Authorization", "Bearer yABsOhb1Z4W-_syjMn0codpyc6k1_Zs6CTROS1drYcs")
+	req.Header.Set("Authorization", "Bearer "+os.Getenv("SHIKIMORI_TOKEN"))
 
 	log.Printf("%s", req)
 	// Структура для ответа
@@ -87,7 +88,7 @@ func (s *Service) GetTopAnime(ctx context.Context, limit int, page int) ([]Anime
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Origin", "https://shikimori.one")
 	req.Header.Set("User-Agent", "shiki_api_test")
-	req.Header.Set("Authorization", "Bearer yABsOhb1Z4W-_syjMn0codpyc6k1_Zs6CTROS1drYcs")
+	req.Header.Set("Authorization", "Bearer "+os.Getenv("SHIKIMORI_TOKEN"))
 
 	var resp AnimeSearchResponseData
 	if err := s.graphqlClient.Run(ctx, req, &resp); err != nil {
@@ -117,7 +118,7 @@ func (s *Service) GetAnimeByID(ctx context.Context, id string) (*Anime, error) {
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Origin", "https://shikimori.one")
 	req.Header.Set("User-Agent", "shiki_api_test")
-	req.Header.Set("Authorization", "Bearer yABsOhb1Z4W-_syjMn0codpyc6k1_Zs6CTROS1drYcs")
+	req.Header.Set("Authorization", "Bearer "+os.Getenv("SHIKIMORI_TOKEN"))
 
 	var resp AnimeSearchResponseData
 
@@ -146,7 +147,7 @@ func (s *Service) GetAnimesByIDs(ctx context.Context, ids []string) ([]Anime, er
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Origin", "https://shikimori.one")
 	req.Header.Set("User-Agent", "shiki_api_test")
-	req.Header.Set("Authorization", "Bearer yABsOhb1Z4W-_syjMn0codpyc6k1_Zs6CTROS1drYcs")
+	req.Header.Set("Authorization", "Bearer "+os.Getenv("SHIKIMORI_TOKEN"))
 
 	var resp AnimeSearchResponseData
 

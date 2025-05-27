@@ -38,6 +38,7 @@ func main() {
 	})
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.CORS())
 	// Роуты для регистрации и логина
 	e.POST("/register", userHandler.Register)
 	e.POST("/login", userHandler.Login)
