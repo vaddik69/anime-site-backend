@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  go-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env  
+    ports:
+      - "8080:8080"
+    environment:
+      - MODERATION_SERVICE_URL=http://comment-moderation:8000
+      - DB_DSN=${DB_DSN}
+    depends_on:
+      - comment-moderation
+      - postgres
+
+  comment-moderation:
+    build: ./comment-moderation
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+volumes:
+  pgdata:          

@@ -1,6 +1,8 @@
 module github.com/Zipklas/anime-site-backend
 
-go 1.23.8
+go 1.23.0
+
+toolchain go1.24.2
 
 require (
 	github.com/golang-jwt/jwt/v4 v4.5.2

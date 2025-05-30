@@ -136,6 +136,7 @@ func (s *Service) GetAnimesByIDs(ctx context.Context, ids []string) ([]Anime, er
                 id
                 name
                 russian
+				description
                 score
                 status
             }
