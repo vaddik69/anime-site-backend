@@ -77,6 +77,11 @@ func (s *Service) GetTopAnime(ctx context.Context, limit int, page int) ([]Anime
 				russian
 				score
 				description
+				poster {
+                id
+                originalUrl
+                mainUrl
+            }
 			}
 		}
 	`)
@@ -108,6 +113,12 @@ func (s *Service) GetAnimeByID(ctx context.Context, id string) (*Anime, error) {
         russian
         episodes
         score
+		description
+		poster {
+                id
+                originalUrl
+                mainUrl
+            }
            }
        }
     `)

@@ -1,3 +1,4 @@
 .env
 *.txt
+*.html
 db_dump.sql
